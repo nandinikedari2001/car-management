@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Assignment for Quadiro Technologies</h1>
+    <h2>Total Cars: <%= totalCars %></h2>
+    <form action="/add-car" method="post">
+        <label>Car Name: </label><input type="text" name="carName" required><br>
+        <label>Manufacturing Year: </label><input type="text" name="manufacturingYear" required><br>
+        <label>Price: </label><input type="text" name="price" required><br>
+        <button type="submit">Add Car</button>
+    </form>
+    <ul>
+        <% cars.forEach((car, index) => { %>
+            <li>
+                <strong><%= car.carName %></strong>, <%= car.manufacturingYear %>, <%= car.price %>
+                <form action="/update-car/<%= index %>" method="post">
+                    <input type="text" name="carName" value="<%= car.carName %>" required>
+                    <input type="text" name="manufacturingYear" value="<%= car.manufacturingYear %>" required>
+                    <input type="text" name="price" value="<%= car.price %>" required>
+                    <button type="submit">Update</button>
+                </form>
+                <form action="/delete-car/<%= index %>" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>
